@@ -1,0 +1,1432 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "import org.apache.log4j.{Level, Logger}\nimport org.apache.spark.ml.evaluation.RegressionEvaluator\nimport org.apache.spark.ml.recommendation.ALS\nimport org.apache.spark.ml.tuning.{ParamGridBuilder, TrainValidationSplit}\nimport org.apache.spark.sql.SQLContext\nimport org.apache.spark.{SparkConf, SparkContext}\nimport org.apache.spark.sql.SparkSession\nimport com.mongodb.spark.config._\n\nimport com.mongodb.spark.MongoSpark\nimport com.mongodb.spark.config.{ReadConfig, WriteConfig}",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:42:20+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586201574641_-1688704132",
+      "id": "paragraph_1586201574641_-1688704132",
+      "dateCreated": "2020-04-06T21:32:54+0200",
+      "dateStarted": "2020-04-06T23:42:20+0200",
+      "dateFinished": "2020-04-06T23:42:22+0200",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:105",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.log4j.{Level, Logger}\nimport org.apache.spark.ml.evaluation.RegressionEvaluator\nimport org.apache.spark.ml.recommendation.ALS\nimport org.apache.spark.ml.tuning.{ParamGridBuilder, TrainValidationSplit}\nimport org.apache.spark.sql.SQLContext\nimport org.apache.spark.{SparkConf, SparkContext}\nimport org.apache.spark.sql.SparkSession\nimport com.mongodb.spark.config._\nimport com.mongodb.spark.MongoSpark\nimport com.mongodb.spark.config.{ReadConfig, WriteConfig}\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "util.Properties.versionString",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:42:26+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres1\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = version 2.11.12\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586201743857_433757367",
+      "id": "paragraph_1586201743857_433757367",
+      "dateCreated": "2020-04-06T21:35:43+0200",
+      "dateStarted": "2020-04-06T23:42:26+0200",
+      "dateFinished": "2020-04-06T23:42:27+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:106"
+    },
+    {
+      "text": "util.Properties.versionString",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:29:39+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres10\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = version 2.11.12\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586202998900_-839344918",
+      "id": "paragraph_1586202998900_-839344918",
+      "dateCreated": "2020-04-06T21:56:38+0200",
+      "dateStarted": "2020-04-06T23:29:39+0200",
+      "dateFinished": "2020-04-06T23:29:40+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:107"
+    },
+    {
+      "text": "val conf = new SparkConf().setAppName(\"YourAppName\").setMaster(\"local[2]\").set(\"spark.executor.memory\",\"1g\")\n      .set(\"spark.app.id\",\"YourSparkId\")\n      .set(\"spark.mongodb.input.uri\",\"mongodb://127.0.0.1/DroneData.data?readPreference=primaryPreferred\")\n      .set(\"spark.mongodb.output.uri\",\"mongodb://127.0.0.1/DroneData.data\")\n      .set(\"spark.driver.allowMultipleContexts\",\"true\")\n      \nval spark = SparkSession.builder()\n      .config(conf)\n      .getOrCreate()",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:42:31+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mconf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.SparkConf\u001b[0m = org.apache.spark.SparkConf@7f9df3d4\n\u001b[1m\u001b[34mspark\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.SparkSession\u001b[0m = org.apache.spark.sql.SparkSession@74ebb8b7\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586204085587_-116924542",
+      "id": "paragraph_1586204085587_-116924542",
+      "dateCreated": "2020-04-06T22:14:45+0200",
+      "dateStarted": "2020-04-06T23:42:31+0200",
+      "dateFinished": "2020-04-06T23:42:36+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:108"
+    },
+    {
+      "text": "val sc = new SparkContext(conf)\n\nval readConf = ReadConfig( sc )",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:42:41+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34msc\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.SparkContext\u001b[0m = org.apache.spark.SparkContext@7d6dc32e\n\u001b[1m\u001b[34mreadConf\u001b[0m: \u001b[1m\u001b[32mcom.mongodb.spark.config.ReadConfig.Self\u001b[0m = ReadConfig(DroneData,data,Some(mongodb://127.0.0.1/DroneData.data?readPreference=primaryPreferred),1000,DefaultMongoPartitioner,Map(),15,ReadPreferenceConfig(primaryPreferred,None),ReadConcernConfig(None),AggregationConfig(None,None,None,true),false,true,250,true,true,10000,None)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586204099040_1545753613",
+      "id": "paragraph_1586204099040_1545753613",
+      "dateCreated": "2020-04-06T22:14:59+0200",
+      "dateStarted": "2020-04-06T23:42:41+0200",
+      "dateFinished": "2020-04-06T23:42:44+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:109"
+    },
+    {
+      "text": "val rdd = MongoSpark.load(sc)",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:42:46+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mrdd\u001b[0m: \u001b[1m\u001b[32mcom.mongodb.spark.rdd.MongoRDD[org.bson.Document]\u001b[0m = MongoRDD[0] at RDD at MongoRDD.scala:51\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586204710560_-942780471",
+      "id": "paragraph_1586204710560_-942780471",
+      "dateCreated": "2020-04-06T22:25:10+0200",
+      "dateStarted": "2020-04-06T23:42:46+0200",
+      "dateFinished": "2020-04-06T23:42:50+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:110"
+    },
+    {
+      "text": "print(rdd.count)",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:42:52+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "10002"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=0",
+              "$$hashKey": "object:4331"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586204752040_-926431455",
+      "id": "paragraph_1586204752040_-926431455",
+      "dateCreated": "2020-04-06T22:25:52+0200",
+      "dateStarted": "2020-04-06T23:42:52+0200",
+      "dateFinished": "2020-04-06T23:42:59+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:111"
+    },
+    {
+      "text": "val df = spark.read.format(\"mongo\").option(\"uri\",\"mongodb://127.0.0.1/DroneData.infraction\").load()",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:43:02+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [Alert: int, Battery: double ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=1",
+              "$$hashKey": "object:4379"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586204771589_1974220662",
+      "id": "paragraph_1586204771589_1974220662",
+      "dateCreated": "2020-04-06T22:26:11+0200",
+      "dateStarted": "2020-04-06T23:43:02+0200",
+      "dateFinished": "2020-04-06T23:43:07+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:112"
+    },
+    {
+      "text": "df.createOrReplaceTempView(\"test\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:43:10+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586207349953_240637374",
+      "id": "paragraph_1586207349953_240637374",
+      "dateCreated": "2020-04-06T23:09:09+0200",
+      "dateStarted": "2020-04-06T23:43:10+0200",
+      "dateFinished": "2020-04-06T23:43:14+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:113"
+    },
+    {
+      "text": "%sql\nSELECT Alert, DroneID FROM test",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:43:16+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Alert": "string",
+                      "DroneID": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "Alert",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "DroneID",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "Alert\tDroneID\n0\t3\n0\t2\n0\t1\n1\t4\n0\t1\n0\t2\n0\t3\n0\t1\n1\t4\n0\t2\n0\t1\n0\t3\n0\t1\n0\t2\n0\t4\n0\t1\n0\t2\n0\t3\n0\t1\n0\t1\n1\t4\n0\t2\n0\t3\n1\t1\n0\t2\n1\t4\n0\t3\n0\t2\n0\t2\n1\t3\n0\t4\n1\t2\n1\t3\n1\t4\n0\t2\n0\t3\n0\t2\n0\t4\n0\t3\n0\t4\n0\t3\n0\t3\n0\t4\n0\t3\n1\t4\n1\t3\n0\t4\n0\t4\n1\t4\n0\t4\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=2",
+              "$$hashKey": "object:4422"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586205053129_-2080403776",
+      "id": "paragraph_1586205053129_-2080403776",
+      "dateCreated": "2020-04-06T22:30:53+0200",
+      "dateStarted": "2020-04-06T23:43:16+0200",
+      "dateFinished": "2020-04-06T23:43:22+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:114"
+    },
+    {
+      "text": "%sql\nSELECT `Vehicle Make`, COUNT(`Vehicle Make`) FROM test GROUP BY `Vehicle Make`\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:37:52+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Vehicle Make": "string",
+                      "count(Vehicle Make)": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "Vehicle Make",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "count(Vehicle Make)",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "Vehicle Make\tcount(Vehicle Make)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586207674103_-118523884",
+      "id": "paragraph_1586207674103_-118523884",
+      "dateCreated": "2020-04-06T23:14:34+0200",
+      "dateStarted": "2020-04-06T23:37:52+0200",
+      "dateFinished": "2020-04-06T23:37:57+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:115"
+    },
+    {
+      "text": "%sql\nSELECT * FROM test",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:43:27+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "Alert0",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Battery1",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "DroneID2",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "House Number3",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Issue Date4",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Issuing Agency5",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Latitude6",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Longitude7",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Plate ID8",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Plate Type9",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Registration State10",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Street Code111",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Street Name12",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Vehicle Body Type13",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Vehicle Color14",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Vehicle Make15",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {
+                          "priority": 0,
+                          "direction": "asc"
+                        },
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Violation Code16",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Violation Location17",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "_c018",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "_id19",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1,
+                      "paginationPageSize": 250
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Alert": "string",
+                      "Battery": "string",
+                      "DroneID": "string",
+                      "House Number": "string",
+                      "Issue Date": "string",
+                      "Issuing Agency": "string",
+                      "Latitude": "string",
+                      "Longitude": "string",
+                      "Plate ID": "string",
+                      "Plate Type": "string",
+                      "Registration State": "string",
+                      "Street Code1": "string",
+                      "Street Name": "string",
+                      "Vehicle Body Type": "string",
+                      "Vehicle Color": "string",
+                      "Vehicle Make": "string",
+                      "Violation Code": "string",
+                      "Violation Location": "string",
+                      "_c0": "string",
+                      "_id": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "Alert\tBattery\tDroneID\tHouse Number\tIssue Date\tIssuing Agency\tLatitude\tLongitude\tPlate ID\tPlate Type\tRegistration State\tStreet Code1\tStreet Name\tVehicle Body Type\tVehicle Color\tVehicle Make\tViolation Code\tViolation Location\t_c0\t_id\n0\t36.291853920641344\t3\tN\t05/04/2015\tT\t40.97286027333645\t-73.2692015800363\tFLN5846\tPAS\tNY\t5\tArverne Blvd\t4DSD\tBK\tDODGE\t2\t100.0\t1\t[5e8b5fb30daa764b84ec1ace]\n0\t40.12257281932014\t2\tS\t12/30/2014\tT\t40.65105784650131\t-73.36302275461377\tP290449\tPAS\tIL\t5\tW 40th St\tBUS\tWHITE\tMCI\t2\t10.0\t1\t[5e8b5fb30daa764b84ec1acf]\n0\t14.55571714549385\t1\t84\t10/16/2014\tT\t40.739331880525924\t-73.22043942247731\tFHH4503\tPAS\tNY\t5\tAvenue C\tSUBN\tWH\tTOYOT\t2\t9.0\t1\t[5e8b5fb30daa764b84ec1ad0]\n1\t65.02987040638578\t4\t32-05\t03/23/2015\tT\t40.7525555211136\t-73.44652924594921\tEAD4536\tPAS\tNY\t4\t31st Ave\tSUBN\tBK\tME/BE\t2\t114.0\t1\t[5e8b5fb30daa764b84ec1ad1]\n0\t75.24910050385544\t1\tE\t08/12/2014\tT\t40.929494082320645\t-73.3909551792299\tFZY2491\tPAS\tNY\t1\tWeeks Ave\tSUBN\tBL\tFORD\t2\t44.0\t2\t[5e8b5fb40daa764b84ec1ad2]\n0\t23.943039229407972\t2\t2581\t11/21/2014\tT\t40.75470039375766\t-73.55620948125181\tDZT5060\tPAS\tNY\t5\tBroadway\tSUBN\tBK\tCADIL\t2\t24.0\t1\t[5e8b5fb40daa764b84ec1ad3]\n0\t53.97378126820242\t3\tS\t07/25/2014\tT\t40.818301687929676\t-73.78457811095006\tGGA3607\tPAS\tNY\t5\tW 80th St\t2DSD\tGY\tVOLKS\t2\t20.0\t1\t[5e8b5fb50daa764b84ec1ad4]\n0\t98.29888943087816\t1\t68-23\t08/23/2014\tS\t40.543663809561316\t-73.78600754832665\tENK5874\tPAS\tNY\t5\tFRESH POND ROAD\tSDN\tBLACK\tSUBAR\t2\t104.0\t2\t[5e8b5fb50daa764b84ec1ad5]\n1\t82.25961202170319\t4\t7\t03/22/2015\tT\t40.52791814947794\t-73.55481012090308\t365YBV\tPAS\tCT\t5\tE 74th St\t4DSD\tBLACK\tBENTL\t2\t19.0\t2\t[5e8b5fb50daa764b84ec1ad6]\n0\t84.54649074898336\t2\tE\t08/07/2014\tT\t40.553116056162246\t-73.90672735767157\t2SX922\tPAS\tOK\t5\tUnion Sq\tDELV\tWHITE\tINTER\t2\t13.0\t1\t[5e8b5fb60daa764b84ec1ad7]\n0\t98.35131470479081\t1\t993\t06/19/2014\tP\t40.826241416559476\t-73.53786458002051\t36458JX\tCOM\tNY\t5\t5 AVE\tP-U\tWH\tTOYOT\t2\t19.0\t2\t[5e8b5fb60daa764b84ec1ad8]\n0\t18.92039254625074\t3\t61-02\t01/22/2015\tT\t40.57238498490013\t-73.76351478517233\tEGW1304\tPAS\tNY\t5\tPalmetto St\tSUBN\tGY\tTOYOT\t2\t104.0\t1\t[5e8b5fb70daa764b84ec1ad9]\n0\t73.00272254112369\t1\t569\t09/08/2014\tT\t40.750784984365225\t-73.61161724118463\tEWD1726\tPAS\tNY\t5\tDahill Rd\t4DSD\tWH\tTOYOT\t2\t66.0\t2\t[5e8b5fb70daa764b84ec1ada]\n0\t68.76284893956918\t2\t431\t09/14/2014\tP\t40.82365698595465\t-73.69325052520087\tLLW14A\tPAS\tNJ\t5\tE 87 ST\tSDN\tBLUE\tTOYOT\t2\t19.0\t1\t[5e8b5fb70daa764b84ec1adb]\n0\t57.694917543195345\t4\t1499\t12/02/2014\tT\t40.833917281158755\t-73.01795322957132\tBKN4172\tPAS\tNY\t5\tConey Island Ave\t4DSD\tRD\tTOYOT\t2\t70.0\t2\t[5e8b5fb80daa764b84ec1adc]\n0\t13.16346920996485\t1\t1422\t03/23/2015\tT\t40.81423413942953\t-73.12523856370512\tAK960Z\tPAS\tNJ\t5\t2nd Ave\tDELV\tGREEN\tFRUEH\t2\t19.0\t2\t[5e8b5fb80daa764b84ec1add]\n0\t58.51491258305406\t2\t166\t04/17/2015\tT\t40.938746377929114\t-73.9923199584505\t64529MD\tCOM\tNY\t5\tW 46th St\tSUBN\tWH\tFORD\t2\t13.0\t2\t[5e8b5fb90daa764b84ec1ade]\n0\t15.851808240848772\t3\t72-65\t07/17/2014\tT\t40.764568477103296\t-73.9514137965996\t6TGY075\tPAS\tCA\t5\tMain St\tSUBN\tSILVE\tTOYOT\t2\t107.0\t1\t[5e8b5fb90daa764b84ec1adf]\n0\t96.59848904846572\t1\t57\t05/08/2015\tT\t40.966971638239606\t-73.27167076057428\t21313JB\tCOM\tNY\t5\tSpring St\tVAN\tWH\tCHEVR\t2\t5.0\t2\t[5e8b5fb90daa764b84ec1ae0]\n0\t46.14123543425418\t1\tW\t08/21/2014\tT\t40.945298771735786\t-73.33205950041655\tDK2S341\tPAS\tTX\t5\tTiebout Ave\tSUBN\tWHITE\tCHEVR\t2\t46.0\t2\t[5e8b5fba0daa764b84ec1ae1]\n1\t50.52703048468255\t4\t577\t01/31/2015\tT\t40.82710540502472\t-73.56775287587344\tGFG6501\tPAS\tNY\t5\t2nd Ave\tSUBN\tDKG\tBMW\t2\t13.0\t2\t[5e8b5fba0daa764b84ec1ae2]\n0\t32.549761839020626\t2\t1115\t06/09/2015\tT\t40.56031510840015\t-73.75130033632676\t6YXV949\tPAS\tCA\t5\tSheridan Ave\t4DSD\tBLUE\tNISSA\t2\t44.0\t2\t[5e8b5fba0daa764b84ec1ae3]\n0\t27.7686402792185\t3\t271\t08/14/2014\tT\t40.7055065112695\t-73.55879043156912\t35861JU\tCOM\tNY\t5\tWalnut Ave\tVAN\tWHITE\tFORD\t2\t40.0\t2\t[5e8b5fbb0daa764b84ec1ae4]\n1\t17.17552962406561\t1\t840\t09/23/2014\tP\t40.91863007806636\t-73.96999472943776\tGJS5597\tPAS\tNY\t5\tFRANKLIN AV\tSDN\tBK\tHONDA\t2\t71.0\t2\t[5e8b5fbb0daa764b84ec1ae5]\n0\t67.36387299230807\t2\t1986\t06/24/2015\tT\t40.877858156262825\t-73.21123978825923\tFCN8976\tPAS\tNY\t5\tMorris Ave\tSUBN\tWH\tFORD\t2\t46.0\t2\t[5e8b5fbc0daa764b84ec1ae6]\n1\t87.5977066947578\t4\tnull\t11/20/2014\tT\t40.81414698409772\t-73.87378642143149\tEVW3883\tPAS\tNY\t1\tOther-See Comments\t4DSD\tSILVE\tHONDA\t2\t69.0\t2\t[5e8b5fbd0daa764b84ec1ae7]\n0\t83.85171474979816\t3\t15\t03/17/2015\tT\t40.93056348123388\t-73.32772039465894\t25859MD\tCOM\tNY\t5\tMaiden Ln\tPICK\tWH\tHINO\t2\t1.0\t2\t[5e8b5fbd0daa764b84ec1ae8]\n0\t53.16522900530082\t2\t32\t02/23/2015\tT\t40.597029889790285\t-73.73415873356514\t9N88H\tOMT\tNY\t5\tMacombs Pl\tTAXI\tYW\tFORD\t2\t32.0\t2\t[5e8b5fbd0daa764b84ec1ae9]\n0\t61.69888067763046\t2\t5009\t03/02/2015\tT\t40.86510201985107\t-73.3958053457483\tXG550D\tPAS\tNJ\t5\tBroadway\tVAN\tWHITE\tFORD\t2\t33.0\t2\t[5e8b5fbf0daa764b84ec1aea]\n1\t83.58250674005349\t3\t1314\t09/12/2014\tT\t40.79529406977001\t-73.58662188888033\t13126TC\tTRC\tNY\t5\tSt Nicholas Ave\tTRAC\tBR\tMACK\t2\t33.0\t2\t[5e8b5fbf0daa764b84ec1aeb]\n0\t48.83729506141178\t4\t90-40\t01/05/2015\tT\t40.78933070149184\t-73.09896552785716\t95137JA\tCOM\tNY\t5\t84th St\tREFG\tRED\tVOLVO\t2\t102.0\t2\t[5e8b5fbf0daa764b84ec1aec]\n1\t79.87226784791824\t2\t19\t02/23/2015\tT\t40.61111216339785\t-73.92392434221767\tD83DEF\tPAS\tNJ\t5\tE Broadway.\tSUBN\tBLUE\tBMW\t2\t5.0\t2\t[5e8b5fc00daa764b84ec1aed]\n1\t37.08070254557115\t3\tE\t06/24/2015\tT\t40.80956325113351\t-73.00332805563897\tWBB45L\tPAS\tNJ\t5\tMacombs Pl\tSUBN\tWHITE\tLINCO\t2\t32.0\t2\t[5e8b5fc10daa764b84ec1aee]\n1\t75.3913021368901\t4\t204\t01/22/2015\tT\t40.82858697087021\t-73.79302633594658\tGPD2474\tPAS\tNY\t5\tMacon St\tSUBN\tGR\tINFIN\t2\t79.0\t2\t[5e8b5fc20daa764b84ec1aef]\n0\t64.52899576051709\t2\t75\t10/14/2014\tT\t40.93400986201463\t-73.95998437720863\t85767JX\tCOM\tNY\t5\tW 71st St\tVAN\tWH\tFRUEH\t2\t20.0\t2\t[5e8b5fc20daa764b84ec1af0]\n0\t75.08322015392923\t3\t56-21\t09/18/2014\tT\t40.74445816150249\t-73.81773166275468\tFDB3589\tPAS\tNY\t5\t141st St\tSUBN\tBL\tBMW\t2\t109.0\t2\t[5e8b5fc30daa764b84ec1af1]\n0\t88.00692417879313\t2\t2145\t03/18/2015\tT\t40.68063671711156\t-73.13543487184235\t21329MG\tCOM\tNY\t5\t2nd Ave\tDELV\tWHITE\tNS/OT\t2\t23.0\t2\t[5e8b5fc30daa764b84ec1af2]\n0\t46.91334731844496\t4\t1086\t05/13/2015\tT\t40.70550881379353\t-73.60435322868605\tGTT7941\tPAS\tNY\t5\tE 18th St\tSUBN\tBK\tCHEVR\t2\t70.0\t2\t[5e8b5fc40daa764b84ec1af3]\n0\t74.41382071100008\t3\tN\t09/03/2014\tT\t40.9632450636414\t-73.36877646450928\tGHJ1935\tPAS\tNY\t5\t69th Rd\t4DSD\tWH\tTOYOT\t2\t107.0\t2\t[5e8b5fc50daa764b84ec1af4]\n0\t10.487374307589846\t4\t105\t07/07/2014\tT\t40.79417448647344\t-73.55377410867395\tCZW4256\tPAS\tNY\t5\tJewel St\tSUBN\tGREEN\tCHEVR\t2\t94.0\t2\t[5e8b5fc70daa764b84ec1af5]\n0\t28.123928593507955\t3\t425\t08/18/2014\tT\t40.70907417590017\t-73.8817851958826\tCL114696\tPAS\tDE\t5\t7th Ave\tDELV\tWHITE\tINTER\t2\t14.0\t2\t[5e8b5fc70daa764b84ec1af6]\n0\t37.87674853535612\t3\t555\t10/29/2014\tT\t40.538151685383006\t-73.94991445602822\tGNS5850\tPAS\tNY\t5\tW 57th St\t2DSD\tMR\tCHEVR\t2\t18.0\t2\t[5e8b5fc90daa764b84ec1af7]\n0\t69.20239485061865\t4\t724\t11/05/2014\tT\t40.64638209998418\t-73.58848730377386\t36896MA\tCOM\tNY\t5\tAmsterdam Ave\tDELV\tWH\tHINO\t2\t24.0\t2\t[5e8b5fc90daa764b84ec1af8]\n0\t62.44439873245821\t3\t43\t05/18/2015\tT\t40.986448512640855\t-73.38652073775576\t46075MD\tCOM\tNY\t5\tW 64th St\tVAN\tWH\tFORD\t2\t20.0\t2\t[5e8b5fcb0daa764b84ec1af9]\n1\t16.09593300433939\t4\t1309\t11/25/2014\tT\t40.914593229529295\t-73.06494643361394\tFYK9540\tPAS\tNY\t4\t50th St\tSUBN\tBK\tTOYOT\t2\t66.0\t2\t[5e8b5fcc0daa764b84ec1afa]\n1\t40.56305331181386\t3\t56\t10/10/2014\tT\t40.70613995738217\t-73.92095438464075\tAP440T\tPAS\tNJ\t5\tW Burnside Ave\tDELV\tGREEN\tFRUEH\t2\t46.0\t2\t[5e8b5fcd0daa764b84ec1afb]\n0\t94.73120289652479\t4\t285\t03/09/2015\tT\t40.94718703556425\t-73.14216227305984\tEYH2136\tPAS\tNY\t5\tProspect Pl\tSUBN\tBLACK\tSATUR\t2\t77.0\t2\t[5e8b5fce0daa764b84ec1afc]\n0\t34.24292616369874\t4\t35\t01/23/2015\tT\t40.91091748334833\t-73.26875606083517\tGPV4827\tPAS\tNY\t5\tGravesend Neck Rd\tSUBN\tGY\tDODGE\t2\t61.0\t2\t[5e8b5fd10daa764b84ec1afd]\n1\t30.475355082825907\t4\t46\t11/07/2014\tT\t40.672824307770775\t-73.508546290351\tGST1210\tPAS\tNY\t5\tRutland Rd\tSUBN\tGY\tFORD\t2\t70.0\t2\t[5e8b5fd30daa764b84ec1afe]\n0\t36.98990483939849\t4\t1310\t12/31/2014\tT\t40.629089134146966\t-73.47866703428916\tGFN5046\tPAS\tNY\t4\t48th St\tSUBN\tWH\tDODGE\t2\t66.0\t2\t[5e8b5fd60daa764b84ec1aff]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=3",
+              "$$hashKey": "object:4976"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586208562810_2034015850",
+      "id": "paragraph_1586208562810_2034015850",
+      "dateCreated": "2020-04-06T23:29:22+0200",
+      "dateStarted": "2020-04-06T23:43:27+0200",
+      "dateFinished": "2020-04-06T23:43:29+0200",
+      "status": "FINISHED",
+      "$$hashKey": "object:116"
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "DroneID0",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {
+                          "priority": 0,
+                          "direction": "desc"
+                        },
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "count(DroneID)1",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1,
+                      "paginationPageSize": 250
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "DroneID": "string",
+                      "count(DroneID)": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "DroneID",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "count(DroneID)",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=4",
+              "$$hashKey": "object:9446"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=5",
+              "$$hashKey": "object:9447"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=6",
+              "$$hashKey": "object:9448"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=7",
+              "$$hashKey": "object:9449"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=8",
+              "$$hashKey": "object:9450"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586209481439_680071461",
+      "id": "paragraph_1586209481439_680071461",
+      "dateCreated": "2020-04-06T23:44:41+0200",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:7650",
+      "text": "%sql\nSELECT DroneID,  COUNT(DroneID) FROM test GROUP BY DroneID",
+      "dateUpdated": "2020-04-06T23:46:17+0200",
+      "dateFinished": "2020-04-06T23:45:56+0200",
+      "dateStarted": "2020-04-06T23:45:46+0200",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "DroneID\tcount(DroneID)\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "count(1)": "string",
+                      "Issue Date": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=9",
+              "$$hashKey": "object:10392"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=10",
+              "$$hashKey": "object:10393"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=11",
+              "$$hashKey": "object:10394"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=12",
+              "$$hashKey": "object:10395"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=13",
+              "$$hashKey": "object:10396"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586209525552_-1264643173",
+      "id": "paragraph_1586209525552_-1264643173",
+      "dateCreated": "2020-04-06T23:45:25+0200",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:7794",
+      "text": "%sql\nSELECT COUNT(*), `Issue Date` FROM test GROUP BY `Issue Date`\n",
+      "dateUpdated": "2020-04-06T23:47:47+0200",
+      "dateFinished": "2020-04-06T23:47:43+0200",
+      "dateStarted": "2020-04-06T23:47:37+0200",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "count(1)\tIssue Date\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sql\nSELECT count(`Plate Type`), `Plate Type` FROM test GROUP BY  `Plate Type`",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:48:16+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "count(Plate Type)": "string",
+                      "Plate Type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=14",
+              "$$hashKey": "object:10970"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=15",
+              "$$hashKey": "object:10971"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=16",
+              "$$hashKey": "object:10972"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=17",
+              "$$hashKey": "object:10973"
+            },
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=18",
+              "$$hashKey": "object:10974"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586209620981_1804762173",
+      "id": "paragraph_1586209620981_1804762173",
+      "dateCreated": "2020-04-06T23:47:00+0200",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:9489",
+      "dateFinished": "2020-04-06T23:48:13+0200",
+      "dateStarted": "2020-04-06T23:48:06+0200",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "count(Plate Type)\tPlate Type\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sql\nSELECT `Street Name`, COUNT(`Street Name`) FROM test GROUP BY `Street Name` ORDER BY COUNT(`Street Name`) DESC LIMIT 10",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:48:54+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Street Name": "string",
+                      "count(Street Name)": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://macbook-air-de-adin-1.home:4040/jobs/job?id=19",
+              "$$hashKey": "object:11453"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586209686166_-1391038459",
+      "id": "paragraph_1586209686166_-1391038459",
+      "dateCreated": "2020-04-06T23:48:06+0200",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:10429",
+      "dateFinished": "2020-04-06T23:48:51+0200",
+      "dateStarted": "2020-04-06T23:48:47+0200",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "Street Name\tcount(Street Name)\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-06T23:48:47+0200",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1586209727051_1372620597",
+      "id": "paragraph_1586209727051_1372620597",
+      "dateCreated": "2020-04-06T23:48:47+0200",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:11019"
+    }
+  ],
+  "name": "Fucntionnal",
+  "id": "2F55WMK9Z",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Fucntionnal"
+}

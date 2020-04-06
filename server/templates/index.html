@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="static/js/application.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<style>
+	      #map {
+	        width: 100%;
+	        height: 400px;
+	        background-color: grey;
+	      }
+	    </style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+  <div class="row header-title">
+    <h1>Project functional programming</h1>
+    <p>Yazid DJAOUDI | Adin HRELJA | Nassim HADDAR | Ariles HADJAL</p>
+	<h2>Alert Prestacop</h2>
+  </div>
+</div>
+<div class="container-fluid" id="content">
+  <div class="row map-google">
+      <h3>Alert Map</h3>
+      <div id="map"></div>
+  </div>
+  <div class="row tab-alertes">
+      <div class="table-responsive">
+          <h3>Alert List</h3>
+          <table class="table table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Plate ID</th>
+                <th scope="col">Registration State</th>
+                <th scope="col">Plate Type</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Violation Code</th>
+                <th scope="col">Vehicle Body Type</th>
+                <th scope="col">Vehicle Make</th>
+                <th scope="col">Issuing Agency</th>
+                <th scope="col">Street Code1</th>
+                <th scope="col">Violation Location</th>
+                <th scope="col">House Number</th>
+                <th scope="col">Street Name</th>
+                <th scope="col">Vehicle Color</th>
+                <th scope="col">Latitude</th>
+                <th scope="col">Longitude</th>
+                <th scope="col">DroneID</th>
+                <th scope="col">Alert</th>
+              </tr>
+            </thead>
+            <tbody id="alerts">
+            </tbody>
+          </table>
+      </div>
+
+  </div>
+</div>
+
+	<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxMP2YpkBI6Vuv--4dUNZZYcgTBzDV7kg&callback=initMap">
+	</script>
+
+</body>
+</html>
